@@ -2,6 +2,10 @@
 
 import re
 import os
+import time
+import datetime
+import hashlib
+import uuid
 
 # used for mobile verify
 MOBILE_RE = re.compile('^1[34578]\d{9}$')
@@ -21,3 +25,99 @@ TServerTimeoutSentryProject = None
 
 # /path/to/rest_arch/rest_arch
 LIB_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
+
+
+def is_mobile(s):
+    """
+    Check whether a string is mobile number.
+
+    :param s: mobile string to be checked
+    """
+    return MOBILE_RE.match(s) is not None
+
+
+def is_phone(s):
+    """
+    Check whether a string is a fixed phone format.
+
+    :param s: phone string to be checked
+    """
+
+    return ALL_PHONE_RE.match(s) is not None
+
+
+def is_email(s):
+    """
+    Check whether a string is email address.
+
+    :param s: email string to be checked
+    """
+    return EMAIL_RE.match(s) is not None
+
+
+def datetime2utc(dt):
+    """
+    Sends a :class:`datetime.datetime` object.
+    Returns :class:`int` time value.
+
+    :param dt: :class:`datetime` object
+    """
+    return int(time.mktime(dt.timetuple()))
+
+
+def utc2datetime(t):
+    """
+    Sends a :class:`float` time value.
+    Returns :class:`datetime.datetime` object.
+
+    :param t: :class:`float` time value.
+    """
+    return datetime.datetime.fromtimestamp(t)
+
+
+def strptime2date(date_str):
+    return datetime.datetime.strptime(date_str, '%Y-%m-%d').date()
+
+
+def chinese2num(s):
+    n = value = unit = flag = 0
+    for i in range(len(s)):
+        if s[i] in NUM_MAP:
+            value = NUM_MAP.index(s[i])
+            n += value * unit / 10 if flag and i == len(s) - 1 else value
+            flag = 0
+        elif s[i] in UNIT_MAP:
+            unit = flag = UNIT_MAP[s[i]]
+            if unit >= 10000:
+                return n * unit + chinese2num(s[i + 1:])
+            n += (unit - 1) * value if value else unit
+        else:
+            raise ValueError
+    return n
+
+
+def md5(s):
+    """
+    Returns :class:`str` object after md5 encrypt.
+
+    :param s: :class:`str`, the str to md5 encrypt.
+    """
+    return hashlib.new('md5', s).hexdigest()
+
+
+def sha1(s):
+    """
+    Returns :class:`str` object after sha1 encrypt.
+
+    :param s: :class:`str`, the str to sha1 encrypt.
+    """
+    return hashlib.new('sha1', s).hexdigest()
+
+
+def get_unique_string(length=31):
+    uid = uuid.uuid1()
+    full = md5(uid.hex)
+    if length > 0:
+        return full[:length]
+    else:
+        return full
