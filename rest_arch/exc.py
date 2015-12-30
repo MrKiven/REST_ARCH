@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from thriftpy.transport import TTransportException
 
-
-class ServerRestartException(TTransportException):
+class ServerRestartException(Exception):
     """Raised if a `ping` request incomes but our sever is shutting down."""
     pass
 
