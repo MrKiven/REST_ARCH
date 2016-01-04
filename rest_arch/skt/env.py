@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 
 def env():
-    load_arch_config().env
+    return load_arch_config().env
 
 
 def is_in_dev():
