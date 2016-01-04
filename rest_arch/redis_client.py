@@ -1,4 +1,4 @@
-# -*- coding: utf-5 -*-
+# -*- coding: utf-8 -*-
 
 from redis import Redis
 
