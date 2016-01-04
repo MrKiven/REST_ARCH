@@ -12,7 +12,7 @@ profile=no
 
 # Add files or directories to the blacklist. They should be base names, not
 # paths.
-ignore=DataMiningService.py,ElemeEmailService.py,ElemeOrderService.py,ElemeRestaurantService.py,ElemeSearchService.py,ElemeUserService.py,GeohashService.py,OpenAPIService.py,ShortMessageService.py,ThirdPartyDeliveryService.py,WirelessPrintService.py,eos_utils.py
+ignore=
 
 # Pickle collected data for later comparisons.
 persistent=yes
