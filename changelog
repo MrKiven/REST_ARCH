@@ -3,4 +3,6 @@ RESTful Arch Changelog
 
 0.0.1
 -----
-* init
+* log
+* config
+* tests
