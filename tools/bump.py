@@ -23,7 +23,7 @@ def _get_ver_str(ver):
 
 
 def _bump(ver):
-    os.system('sed -i \'\' -e "s/version_info = .*/version_info = (%s)/" zeus_core/__init__.py' % _get_ver_str(ver))  # noqa
+    os.system('sed -i \'\' -e "s/version_info = .*/version_info = (%s)/" rest_arch/__init__.py' % _get_ver_str(ver))  # noqa
 
 
 def main():
