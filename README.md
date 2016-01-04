@@ -9,6 +9,6 @@ A Restful Frame Based On Flask
 5. Push to your origin
 6. Pull request
 
-### contact
+### Contact
 1. kiven.mr@gmail.com
 2. create issue or pull request
