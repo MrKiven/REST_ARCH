@@ -16,3 +16,6 @@ bump:
 doc:
 	make -C docs html
 
+changelog:
+	@git log --first-parent --pretty="format:* %B" v`python setup.py --version`..
+
