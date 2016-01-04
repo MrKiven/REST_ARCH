@@ -2,22 +2,20 @@
 
 from flask import Flask
 
-app_activated = False
+_app_activated = False
 
 
 ##
 # make flask app with param config
 ##
-def make_app(**config):
-    global app_activated
+def make_app(name, **config):
+    global _app_activated
     try:
-        app = Flask(**config)
-        return app
-    except Exception:
-        raise SystemExit("app has not activated!")
-    finally:
-        app_activated = True
+        _app_activated = True
+        return Flask(name, **config)
+    except Exception as exc:
+        raise SystemExit(exc)
 
 
 def is_app_activated():
-    return app_activated
+    return _app_activated
