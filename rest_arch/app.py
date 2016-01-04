@@ -2,8 +2,6 @@
 
 from flask import Flask
 
-_app_activated = False
-
 
 ##
 # make flask app with param config
@@ -15,7 +13,3 @@ def make_app(name, **config):
         return Flask(name, **config)
     except Exception as exc:
         raise SystemExit(exc)
-
-
-def is_app_activated():
-    return _app_activated

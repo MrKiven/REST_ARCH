@@ -9,4 +9,3 @@ def test_app():
     with mock.patch.object(app, 'make_app', mock_obj):
         res = app.make_app("test")
         assert res == "app"
-        assert app.is_app_activated() is True
