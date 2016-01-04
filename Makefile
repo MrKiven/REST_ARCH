@@ -13,3 +13,6 @@ bump:
 	@if [ -z "$(ver)" ]; then echo 'usage: make bump ver=VER_NUM'; exit 1; fi
 	@./tools/bump.py $(ver)
 
+doc:
+	make -C docs html
+
