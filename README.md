@@ -11,4 +11,4 @@ A Restful Frame Based On Flask
 
 ### contact
 1. kiven.mr@gmail.com
-2. create issue
+2. create issue or pull request
