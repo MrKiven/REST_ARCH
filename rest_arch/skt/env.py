@@ -51,6 +51,7 @@ def is_in_container():
 gevent_patched = False
 in_profile = False
 loggers_initialized = False
+initialized = False
 
 
 def set_profile(v):
@@ -66,6 +67,19 @@ def require(name):
     if is_in_container() and not globals()[name]:
         raise EnvNotReadyYetException(
             "env not ready: require {}".format(name))
+
+
+def initialize():
+    """Initialize worker process environment, including: gevent patch,
+    settings, signals, logging, client pools etc. It should be called
+    before all other operations are taken, right after a worker is forked
+    or in cmd entry points. Please note the order of these operations."""
+    global initialized
+    if initialized:
+        logger.warn("Env is already initialized, skipping")
+        return
+    patch_gevent()
+    initialized = True
 
 
 def patch_gevent():
