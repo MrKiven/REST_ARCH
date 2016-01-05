@@ -14,7 +14,6 @@ A Restful Frame Based On Flask
 2. create issue or pull request
 
 ## Installation
----------------
 > python setup.py install
 
 ## Usage
