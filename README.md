@@ -9,13 +9,13 @@ A Restful Frame Based On Flask
 5. Push to your origin
 6. Pull request
 
-### Contact
-1. kiven.mr@gmail.com
-2. create issue or pull request
-
 ## Installation
 > python setup.py install
 
 ## Usage
 1. `skt serve` to run a app
 2. pending...
+
+## Contact
+1. kiven.mr@gmail.com
+2. create issue or pull request
