@@ -3,12 +3,15 @@
 import sys
 import yaml
 import logging
+from urlparse import urlparse
 
 from .consts import (
     ARCH_CONFIG_PATH,
     APP_CONFIG_PATH,
     APP_TYPE_BARE,
     HUSKAR_CACHE_DIR,
+    DEFAULT_APP_PORT,
+    DEFAULT_WORKER_CLASS,
     DEFAULT_WORKER_NUMBER_DEV,
     DEFAULT_WORKER_NUMBER_PROD,
     ENV_DEV
@@ -82,7 +85,7 @@ class BareAppConfig(object):
         app_name: ves.note
         settings: note.settings
         services:
-          flask:
+          wsgi:
             app: note:app
             worker_class: gevent
             requirements: wsgi_requirements.txt
@@ -91,7 +94,8 @@ class BareAppConfig(object):
     TYPE_NAME = APP_TYPE_BARE
     PORT_MAP = port_map
     DEFAULT_APP_PORT = None
-    DEFAULT_WORKER_NUM = None
+    DEFAULT_WORKER_CLASS = None
+
     envvar = EnvvarReader(
         "SKT_APP_PORT",
         "SKT_APP_HAPROXY_PORT",
@@ -192,10 +196,6 @@ class BareAppConfig(object):
         return arch_version or "rest_arch==%s" % rest_arch.__version__
 
     @cached_property
-    def statsd_url(self):
-        return load_arch_config().statsd_uri
-
-    @cached_property
     def message_consumers(self):
         consumers = self.config.get('message_consumer')
         if not consumers:
@@ -247,11 +247,18 @@ class BareAppConfig(object):
             return self.config['services'][self.TYPE_NAME].get(key, default)
         return self.config.get(key, default)
 
+
+class WsgiAppConfig(BareAppConfig):
+    TYPE_NAME = "wsgi"
+    DEFAULT_APP_PORT = DEFAULT_APP_PORT
+    DEFAULT_WORKER_CLASS = DEFAULT_WORKER_CLASS
+
+
 app_config = None
 
 
 def load_app_config(raise_exc=False):
     global app_config
     if app_config is None:
-        app_config = BareAppConfig().load(raise_exc=raise_exc)
+        app_config = WsgiAppConfig().load(raise_exc=raise_exc)
     return app_config

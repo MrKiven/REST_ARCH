@@ -39,7 +39,6 @@ class ArchWsgiApp(SetAppMixin, WSGIApplication):
         self.cfg.set('errorlog', '-')
         self.cfg.set('statsd_prefix',
                      "skt.wsgi.%s" % self.app_config.app_name)
-        self.cfg.set('statsd_host', self.app_config.statsd_url_wsgi)
         super(ArchWsgiApp, self).init(parser, opts, args)
 
 
