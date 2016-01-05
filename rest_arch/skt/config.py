@@ -27,7 +27,7 @@ class ArchConfig(object):
     `CORE_CONFIG_PATH`, example::
 
         env: 'dev'
-        cluster: 'zeus-sync-01'
+        cluster: 'arch-sync-01'
         zookeeper_config:
           hosts: localhost:2181
           username: root
