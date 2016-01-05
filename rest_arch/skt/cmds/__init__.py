@@ -3,6 +3,8 @@
 import logging
 import click
 
+from .serve import serve
+
 
 logger = logging.getLogger(__name__)
 
@@ -12,4 +14,4 @@ logger = logging.getLogger(__name__)
 def skt():
     pass
 
-skt.add_command()
+skt.add_command(serve)
