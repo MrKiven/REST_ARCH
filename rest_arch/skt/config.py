@@ -3,7 +3,6 @@
 import sys
 import yaml
 import logging
-from urlparse import urlparse
 
 from .consts import (
     ARCH_CONFIG_PATH,
