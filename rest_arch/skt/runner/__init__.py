@@ -7,7 +7,7 @@ from . import hooks
 
 
 class SetAppMixin(object):
-    def ves_set(self, config):
+    def arch_set(self, config):
         self.cfg.set('default_proc_name', config.app_name)
         self.cfg.set('worker_class', config.worker_class)
         self.cfg.set('loglevel', 'info')
