@@ -2,8 +2,6 @@
 
 import click
 
-from ...app import make_app
-
 
 @click.command(
     context_settings={
@@ -14,8 +12,8 @@ from ...app import make_app
 )
 @click.pass_context
 def serve(ctx):
-    app = make_app('test')
-    app.run()
+    from .. import runner
+    runner.serve()
 
 
 if __name__ == '__main__':
