@@ -9,6 +9,11 @@ A Restful Frame Based On Flask
 5. Push to your origin
 6. Pull request
 
+## Develop
+> after you add some future or fix something, you should add unittest for your change
+> `make unittest -sx` to make sure test is pass
+> `make pylint` can check your code with flake8
+
 ## Installation
 > python setup.py install
 
