@@ -13,10 +13,6 @@ class ParameterErrorException(SKTBaseException):
     """Bad parameter"""
 
 
-class ThriftFileNotFoundException(SKTBaseException):
-    """Thrit file is not configured in app.yaml or file not found"""
-
-
 class EnvNotReadyYetException(SKTBaseException):
     """Env is not ready yet"""
 
