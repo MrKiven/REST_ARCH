@@ -12,6 +12,11 @@ def _get_version():
         match(open(v_file_path).read()).group(1)
     return re.sub(r'(\'|"|\s+)', '', ver_info_str).replace(',', '.')
 
+entry_points = [
+    # skt
+    "skt = rest_arch.skt.cmds:skt"
+]
+
 data = [
     "static/*",
     "skt/static/*"
@@ -33,6 +38,7 @@ setup(
         'pytest-xdist==1.13.1',
         'mock==1.0.1',
     ],
+    entry_points={"console_scripts": entry_points},
     install_requires=[
         'PyMySQL==0.6.2',
         'redis==2.10.3',
