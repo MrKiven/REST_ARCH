@@ -121,3 +121,61 @@ def get_unique_string(length=31):
         return full[:length]
     else:
         return full
+
+
+class CachedProperty(object):
+    """Decorator like python built-in ``property``, but it results only
+    once call, set the result into decorated instance's ``__dict__`` as
+    a static property.
+    """
+    def __init__(self, fn):
+        self.fn = fn
+        self.__doc__ = fn.__doc__
+
+    def __get__(self, inst, cls):
+        if inst is None:
+            return self
+        val = inst.__dict__[self.fn.__name__] = self.fn(inst)
+        return val
+
+# alias
+cached_property = CachedProperty
+
+
+class EnvvarReader(dict):
+    __uninitialized = object()
+
+    def __init__(self, *envvars):
+        for ev in envvars:
+            ev_norm = self._normalize(ev)
+            if ev != ev_norm:
+                raise ValueError(
+                    'envvar name should be UPPERCASED: {!r}'.format(ev))
+            dict.__setitem__(self, ev_norm, self.__uninitialized)
+
+    @cached_property
+    def configured(self):
+        return any([self[k] for k in self])
+
+    def _normalize(self, varname):
+        return varname.strip().upper()
+
+    def __getitem__(self, key):
+        key = self._normalize(key)
+        value = dict.__getitem__(self, key)
+        if value is self.__uninitialized:
+            value = os.getenv(key, None)
+            dict.__setitem__(self, key, value)
+        return value
+
+    __getattr__ = __getitem__
+
+    def get_int(self, key):
+        value = self.__getitem__(key)
+        if value is not None:
+            return int(value)
+
+    def __setitem__(self, key, value):
+        raise RuntimeError('setting envvar not supported')
+
+    __setattr__ = __setitem__
