@@ -13,7 +13,10 @@ A Restful Frame Based On Flask
 1. kiven.mr@gmail.com
 2. create issue or pull request
 
+## Installation
+---------------
+> python setup.py install
+
 ## Usage
-1. python setup.py install
-2. `skt serve` to run a app
-3. pending...
+1. `skt serve` to run a app
+2. pending...
