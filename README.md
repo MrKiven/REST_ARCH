@@ -12,3 +12,8 @@ A Restful Frame Based On Flask
 ### Contact
 1. kiven.mr@gmail.com
 2. create issue or pull request
+
+## Usage
+1. python setup.py install
+2. `skt serve` to run a app
+3. pending...
