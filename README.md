@@ -17,11 +17,13 @@ A Restful Frame Based On Flask
 > `make pylint` can check your code with flake8
 
 ## Installation
-> python setup.py install
+:one: pip install rest_arch
+:two: python setup.py install
 
 ## Usage
 1. `skt serve` to run a app
-2. pending...
+2. `skt shell` to run shell with ipython
+3. pending...
 
 ## Contact
 1. kiven.mr@gmail.com
