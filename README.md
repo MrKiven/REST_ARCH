@@ -17,8 +17,7 @@ A Restful Frame Based On Flask
 > `make pylint` can check your code with flake8
 
 ## Installation
-:one: pip install rest_arch
-:two: python setup.py install
+> `pip install rest_arch`
 
 ## Usage
 1. `skt serve` to run a app
