@@ -1,6 +1,10 @@
 RESTful Arch Changelog
 =====================
 
+0.0.1.2
+-------
+* add command `skt shell` to run shell with ipython
+
 0.0.1.1
 -------
 * add command skt serve to start a gunicorn serve
