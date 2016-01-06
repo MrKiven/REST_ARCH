@@ -16,6 +16,8 @@ A Restful Frame Based On Gunicorn
 
 > `make pylint` can check your code with flake8
 
+> `make bump ver=x.x.x.x` to bump a new version
+
 ## Installation
 > `pip install rest_arch`
 
