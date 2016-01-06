@@ -31,7 +31,7 @@ class ArchWsgiApp(SetAppMixin, WSGIApplication):
         self.app_settings_uri = self.app_config.app_settings_uri
         self.arch_config = load_arch_config()
         args = [self.app_uri]
-        self.ves_set(self.app_config)
+        self.arch_set(self.app_config)
         self.cfg.set('syslog_prefix', "{0}.wsgi".format(
             self.app_config.app_name))
         self.cfg.set('post_fork', hooks.post_fork)
