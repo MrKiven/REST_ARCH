@@ -25,7 +25,7 @@ data = [
 setup(
     name="rest_arch",
     version=_get_version(),
-    description="A Restful Framework Based On Flask",
+    description="A Restful Framework Based On Gunicorn",
     long_description=open("README.md").read(),
     author="kiven",
     author_email="kiven.mr@gmail.com",
