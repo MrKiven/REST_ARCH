@@ -5,7 +5,7 @@
   REST_ARCH
   ~~~~~~~
 
-  RESTful Framework Based On Flask
+  RESTful Framework Based On Gunicorn
 """
 
 version_info = (0, 0, 1, 2)
