@@ -1,6 +1,10 @@
 RESTful Arch Changelog
 =====================
 
+0.1.0.1
+-------
+* add a demo app struct
+
 0.1.0
 -----
 * `skt serve` to start a wsgi service
