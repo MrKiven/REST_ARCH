@@ -1,6 +1,11 @@
 RESTful Arch Changelog
 =====================
 
+0.1.0
+-----
+* `skt serve` to start a wsgi service
+  `skt shell` to start a client to call service api
+
 0.0.1.2
 -------
 * add command `skt shell` to run shell with ipython
