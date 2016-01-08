@@ -24,19 +24,12 @@ A Restful Frame Based On Gunicorn
 ## App struct
 
         ├── app.yaml
-        ├── database
-        │   └── schema.sql
         ├── foo
         │   ├── __init__.py
-        │   ├── __init__.pyc
         │   ├── app.py
-        │   ├── app.pyc
-        │   ├── celeryconfig.py
         │   ├── models.py
         │   ├── settings.py
-        │   └── settings.pyc
         ├── requirements.txt
-        └── roles.yaml
 
 ## Usage
 1. `skt serve` to run a app
