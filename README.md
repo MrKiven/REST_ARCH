@@ -21,6 +21,16 @@ A Restful Frame Based On Gunicorn
 ## Installation
 > `pip install rest_arch`
 
+## App struct
+
+        ├── app.yaml
+        ├── foo
+        │   ├── __init__.py
+        │   ├── app.py
+        │   ├── models.py
+        │   ├── settings.py
+        ├── requirements.txt
+
 ## Usage
 1. `skt serve` to run a app
 2. `skt shell` to run shell with ipython
