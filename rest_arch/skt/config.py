@@ -142,7 +142,6 @@ class BareAppConfig(object):
         from .env import is_in_dev
 
         port = self.envvar.get_int('skt_app_port')
-        print "port:", port
         if port:
             return port
         if is_in_dev():
