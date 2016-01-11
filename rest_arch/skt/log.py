@@ -119,7 +119,7 @@ def gen_logging_dictconfig(logger_name, env):
     return conf
 
 
-def setup_loggers(logger_name, env):
+def setup_loggers(logger_name, env=ENV_DEV):
     setup_logger_cls()
     conf = gen_logging_dictconfig(logger_name, env)
     logging.config.dictConfig(conf)
