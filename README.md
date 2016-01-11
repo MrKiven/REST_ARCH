@@ -36,6 +36,16 @@ A Restful Frame Based On Gunicorn
 2. `skt shell` to run shell with ipython
 3. pending...
 
+## Log
+
+    import logging
+    from rest_arch.skt.log import setup_loggers
+
+    setup_loggers(__name__)
+    logger = logging.getLogger(__name__)
+
+    logger.info('A Test Log Info')
+
 ## Contact
 1. kiven.mr@gmail.com
 2. create issue or pull request
