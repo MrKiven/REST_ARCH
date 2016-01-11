@@ -1,0 +1,68 @@
+app_name: {{ app_id }}
+settings: {{ package }}.settings
+services:
+    wsgi:
+        app: {{ package }}.app:app
+        worker_class: gevent
+
+# Async workers deal with tasks coming from other places sent by
+# `send_task` to *THIS* service.
+#
+# NOTE: If what you want is to merely `send_task` to *OTHER*
+# services, you don't need this.
+#
+# And you need to contact python arch team to register your service
+# before uncommenting following lines.
+#
+# celery_settings: {{ package }}.celeryconfig
+# async_workers:
+#     - name: {{ app_id }}
+#       size: 8
+#       type: celery
+#     - name: {{ app_id }}
+#       type: mysql
+#       entry: {{ package }}.tasks:do_mysql_work
+
+
+# If you want to use normal mq for your app, uncomment following lines.
+#
+# message_consumer:
+#     - queue_name: {{ app_id }}.your_queue_name_1
+#       handler: note.message_handlers:handle_message
+#       no_ack: false
+#       auto_ack: false
+#       always_ack: false
+#       on_error: note.message_handlers:handler_error
+#     - queue_name: {{ app_id }}.your_queue_name_2
+#       handler: note.message_handlers:handle_message
+#
+# message_consumer_settings:  # [OPTIONAL]
+#     process_num: 3
+#
+#
+# EXAMPLE END
+#
+#
+# If you want to use `multi-broker` in your app, comment line above and
+# uncomment following lines.
+#
+# message_consumer:
+#     - broker_urls: ['amqp://localhost:5672/', 'amqp://localhost:5673/']
+#       process_num: 3
+#       handler_type: 1
+#       async_pool_size: 50
+#       queues:
+#           - queue_name: Your_queue_name
+#             handler: note.message_handlers:handle_message1
+#             no_ack: false
+#             auto_ack: true
+#             always_ack: false
+#             on_error: note.message_handlers:handle_error1
+#           - queue_name: Your_queue_name2
+#             handler: note.message_handlers:handle_message1
+#     - broker_urls: ['amqp://localhost:5672/', 'amqp://localhost:5673/']
+#       queues:
+#           - queue_name: Your_queue_name3
+#             handler: note.message_handlers:handle_message1
+#           - queue_name: Your_queue_name4
+#             handler: note.message_handlers:handle_message1

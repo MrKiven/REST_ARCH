@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+
+# This is a very basic configuration file for {{ app_slug }}.
+# Uncomment or add what you need.
+
+# ========== Cache Settings ==========
+CACHE_NAMESPACE = 'cache.{{ app_slug }}'
+CACHE_SETTINGS = {
+    '{{ app_slug }}': 'redis://localhost:6379'
+}
+
+
+# ========== DB Settings ==========
+# Change the credentials in "master" and "slave" to your needs
+DB_SETTINGS = {
+    '{{ app_slug }}': {
+        'urls': {
+            'master': 'mysql+pymysql://root@localhost:3306/{{ app_slug }}?charset=utf8',
+            'slave': 'mysql+pymysql://root@localhost:3306/{{ app_slug }}?charset=utf8'
+        },
+        'max_overflow': -1,
+        'pool_size': 10,
+        'pool_recycle': 1200
+    }
+}
+
+
+# ========== Async Settings ==========
+# Enable async feature by uncomment following line, see
+# also: `app.yaml`
+# ASYNC_CELERYCONFIG = '{{ package }}.celeryconfig'
+ASYNC_ENABLED = False
