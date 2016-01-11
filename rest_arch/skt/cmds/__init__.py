@@ -5,7 +5,7 @@ import click
 
 from .serve import serve
 from .shell import shell
-
+from .bootstrap import bootstrap
 
 logger = logging.getLogger(__name__)
 
@@ -17,3 +17,4 @@ def skt():
 
 skt.add_command(serve)
 skt.add_command(shell)
+skt.add_command(bootstrap)
