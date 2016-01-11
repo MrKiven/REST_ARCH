@@ -1,8 +1,11 @@
 # -*- coding: utf-8 -*-
 
 import logging
-from flask import Flask
 
+from flask import Flask
+from rest_arch.skt.log import setup_loggers
+
+setup_loggers(__name__)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
@@ -10,4 +13,5 @@ app = Flask(__name__)
 
 @app.route('/ping')
 def ping():
-    return 'True'
+    logger.info('`ping` api called')
+    return 'true'
