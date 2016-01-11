@@ -15,3 +15,10 @@ app = Flask(__name__)
 def ping():
     logger.info('`ping` api called')
     return 'true'
+
+
+def index():
+    return 'index'
+
+
+app.add_url_rule('/', index.__name__, index)
