@@ -34,7 +34,8 @@ A Restful Frame Based On Gunicorn
 ## Usage
 1. `skt serve` to run a app
 2. `skt shell` to run shell with ipython
-3. pending...
+3. `skt bootstrap` to generate a demo app
+4. pending...
 
 ## Log
 

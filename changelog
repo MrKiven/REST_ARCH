@@ -1,6 +1,11 @@
 RESTful Arch Changelog
 =====================
 
+pending
+-------
+* add log
+* `skt bootstrap` command to generate a demo app
+
 0.1.0.1
 -------
 * add a demo app struct
