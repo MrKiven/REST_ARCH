@@ -12,6 +12,9 @@ import click
 )
 @click.pass_context
 def serve(ctx):
+    """
+    # start app from current dir
+    """
     from .. import runner
     runner.serve()
 
