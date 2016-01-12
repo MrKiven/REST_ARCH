@@ -2,13 +2,13 @@
 
 import logging
 
-from flask import Flask
 from rest_arch.skt.log import setup_loggers
+from rest_arch.app import make_app
 
 setup_loggers(__name__)
 logger = logging.getLogger(__name__)
 
-app = Flask(__name__)
+app = make_app(__name__)
 
 
 @app.route('/ping')
