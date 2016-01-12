@@ -9,7 +9,6 @@ from flask import Flask
 def make_app(name, **config):
     global _app_activated
     try:
-        _app_activated = True
         return Flask(name, **config)
     except Exception as exc:
         raise SystemExit(exc)
