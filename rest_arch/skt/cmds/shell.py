@@ -23,6 +23,9 @@ def _client_ctx(app_name, service, host, port):
 @click.option('--profile', default=False, is_flag=True,
               help='Profile all apis calls')
 def shell(host, port, rpc, profile):
+    """
+    # run a client in ipython
+    """
     user_ns = __main__.__dict__
     c = Client(host, port)
 
