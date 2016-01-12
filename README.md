@@ -37,15 +37,20 @@ A Restful Frame Based On Gunicorn
 3. `skt bootstrap` to generate a demo app
 4. pending...
 
-## Log
+## APP&LOG
 
     import logging
     from rest_arch.skt.log import setup_loggers
+    from rest_arch.app import make_app
+
+    app = make_app(__name__)
 
     setup_loggers(__name__)
     logger = logging.getLogger(__name__)
 
     logger.info('A Test Log Info')
+
+    app.run()
 
 ## Contact
 1. kiven.mr@gmail.com
