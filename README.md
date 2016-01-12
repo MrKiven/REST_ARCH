@@ -32,10 +32,10 @@ A Restful Frame Based On Gunicorn
         ├── requirements.txt
 
 ## Usage
-1. `skt serve` to run a app
-2. `skt shell` to run shell with ipython
-3. `skt bootstrap` to generate a demo app
-4. pending...
+1. `skt bootstrap` to build a app.
+2. `cd your_app_path` run `skt serve` to start app.
+3. `skt shell` to run a client as `c`.
+4. `c.get('/ping')` to get a response.
 
 ## APP&LOG
 
@@ -49,8 +49,6 @@ A Restful Frame Based On Gunicorn
     logger = logging.getLogger(__name__)
 
     logger.info('A Test Log Info')
-
-    app.run()
 
 ## Contact
 1. kiven.mr@gmail.com
