@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import logging
+from flask import request, json
 
 from rest_arch.skt.log import setup_loggers
 from rest_arch.app import make_app
@@ -21,4 +22,9 @@ def index():
     return 'index'
 
 
+def test_task():
+    return json.dumps(request.get_json())
+
+
 app.add_url_rule('/', index.__name__, index)
+app.add_url_rule('/add', test_task.__name__, test_task, methods=['POST'])
