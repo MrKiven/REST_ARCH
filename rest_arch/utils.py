@@ -6,6 +6,7 @@ import time
 import datetime
 import hashlib
 import uuid
+import logging
 
 # used for mobile verify
 MOBILE_RE = re.compile('^1[34578]\d{9}$')
@@ -25,6 +26,8 @@ TServerTimeoutSentryProject = None
 
 # /path/to/rest_arch/rest_arch
 LIB_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
+
+DEPRECATION_PATTERN = 'option %r is deprecating, please use %r instead'
 
 
 def is_mobile(s):
@@ -179,3 +182,30 @@ class EnvvarReader(dict):
         raise RuntimeError('setting envvar not supported')
 
     __setattr__ = __setitem__
+
+
+class EmptyValue(object):
+    """represent a value that is empty, see :meth:`is_empty` to see what
+    empty means here
+    """
+    def __init__(self, val):
+        if not self.is_empty(val):
+            raise ValueError('error invalid empty value: %r' % val)
+        self.val = val
+
+    @staticmethod
+    def is_empty(val):
+        """
+        empty value means the following stuff:
+
+            ``None``, ``[]``, ``()``, ``{}``, ``''``
+        """
+        return val not in (False, 0) and not val
+
+def warn_deprecation(logger_or_name, old, new, lvl=logging.WARNING,
+                     pat=DEPRECATION_PATTERN):
+    if isinstance(logger_or_name, logging.Logger):
+        logger = logger_or_name
+    else:
+        logger = logging.getLogger(logger_or_name)
+    logger.log(lvl, pat, old, new)
