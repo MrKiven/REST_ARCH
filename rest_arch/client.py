@@ -18,7 +18,7 @@ class Client(object):
     # default content-type: json
     def post(self, route, payload, json_format=True):
         if json_format:
-            headers = {'Content-Type':'application/json'}
+            headers = {'Content-Type': 'application/json'}
         else:
             headers = None
         return requests.post(
