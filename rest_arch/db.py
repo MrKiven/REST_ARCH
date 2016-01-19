@@ -9,6 +9,7 @@ import uuid
 import sha
 import logging
 import functools
+import contextlib
 
 from sqlalchemy import event
 from sqlalchemy import create_engine as sqlalchemy_create_engine
@@ -29,6 +30,18 @@ def scope_func():
     if not hasattr(db_ctx, 'session_stack'):
         db_ctx.session_stack = 0
     return (threading.current_thread().ident, db_ctx.session_stack)
+
+
+@contextlib.contextmanager
+def session_stack():
+    if not hasattr(db_ctx, 'session_stack'):
+        db_ctx.session_stack = 0
+
+    try:
+        db_ctx.session_stack += 1
+        yield
+    finally:
+        db_ctx.session_stack -= 1
 
 
 def close_connections(engines, transations):
