@@ -98,6 +98,9 @@ def validate_service_name(ctx, argument, value):
               callback=validate_service_name,
               help="Service name like 'Note'")
 def bootstrap(app_id, service_name):
+    """
+    # generate a demo app
+    """
     from rest_arch import __version__
     app_slug = package_name = app_id.split('.')[1]
     mapping = dict(app_id=app_id,
