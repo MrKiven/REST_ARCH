@@ -4,16 +4,17 @@ import logging
 import os
 import time
 import contextlib
-from sqlalchemy import event
 import threading
+
+from sqlalchemy import event
+
+from .consts import PLACE_HOLDER
+from .utils import LIB_DIR_PATH
 
 from .skt.config import load_app_config
 from .skt import env
 from .ctx import g
-from .consts import PLACE_HOLDER
 from .conf import settings
-
-LIB_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
 
 
 def obj2str(obj):

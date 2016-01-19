@@ -217,5 +217,4 @@ class Config(DefaultConfig):
                 celery_settings = self.ASYNC_CELERYCONFIG
             self.celeryconfig.from_object(celery_settings)
 
-
 settings = Config()

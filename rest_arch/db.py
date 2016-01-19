@@ -12,9 +12,9 @@ import functools
 
 from sqlalchemy import event
 from sqlalchemy import create_engine as sqlalchemy_create_engine
+from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 
 from .skt.env import is_in_dev
 from .log import get_sql_logger
@@ -100,6 +100,24 @@ def patch_engine(engine):
     return engine
 
 
+def make_session(engines, force_scope=False, info=None):
+    if is_in_dev() or force_scope:
+        scopefunc = scope_func
+    else:
+        scopefunc = None
+
+    session = scoped_session(
+        sessionmaker(
+            class_=RoutingSession,
+            expire_on_commit=False,
+            engines=engines,
+            info=info or {"name": uuid.uuid4().hex},
+        ),
+        scopefunc=scopefunc
+    )
+    return session
+
+
 def create_engine(*args, **kwds):
     engine = patch_engine(sqlalchemy_create_engine(*args, **kwds))
     get_sql_logger().register(engine)
@@ -126,24 +144,6 @@ def gen_commit_deco(DBSession, raise_exc, error_code):
             return ret
         return wrapper
     return decorated
-
-
-def make_session(engines, force_scope=False, info=None):
-    if is_in_dev() or force_scope:
-        scopefunc = scope_func
-    else:
-        scopefunc = None
-
-    session = scoped_session(
-        sessionmaker(
-            class_=RoutingSession,
-            expire_on_commit=False,
-            engines=engines,
-            info=info or {"name": uuid.uuid4().hex},
-        ),
-        scopefunc=scopefunc
-    )
-    return session
 
 
 def sql_commenter(conn, cursor, statement, params, context, executemany):
@@ -204,6 +204,7 @@ class DBManager(object):
                              "please check your config".format(name))
         session = self._make_session(name, config)
         self.session_map[name] = session
+        return session
 
     @classmethod
     def _make_session(cls, db, config):
