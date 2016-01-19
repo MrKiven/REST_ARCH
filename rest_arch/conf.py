@@ -1,11 +1,5 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
-
-class Config():
-    pass
-
-=======
 import logging
 
 from importlib import import_module
@@ -223,6 +217,4 @@ class Config(DefaultConfig):
                 celery_settings = self.ASYNC_CELERYCONFIG
             self.celeryconfig.from_object(celery_settings)
 
-
->>>>>>> master
 settings = Config()

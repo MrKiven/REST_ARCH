@@ -1,15 +1,5 @@
 # -*- coding: utf-8 -*-
 
-<<<<<<< HEAD
-import logging
-import threading
-import random
-import gevent
-import os
-import sha
-import time
-import uuid
-=======
 import os
 import time
 import threading
@@ -18,31 +8,18 @@ import gevent
 import uuid
 import sha
 import logging
->>>>>>> master
 import functools
 
 from sqlalchemy import event
 from sqlalchemy import create_engine as sqlalchemy_create_engine
-<<<<<<< HEAD
 from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 from sqlalchemy.orm import Session, scoped_session, sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
-
-from .conf import settings
-from .ctx import g
-from .skt.env import is_in_dev
-from .log import get_sql_logger
-
-=======
-from sqlalchemy.orm import Session, scoped_session, sessionmaker
-from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.declarative import declarative_base, DeclarativeMeta
 
 from .skt.env import is_in_dev
 from .log import get_sql_logger
 from .conf import settings
 from .ctx import g
->>>>>>> master
 
 db_ctx = threading.local()
 logger = logging.getLogger(__name__)
@@ -123,7 +100,6 @@ def patch_engine(engine):
     return engine
 
 
-<<<<<<< HEAD
 def make_session(engines, force_scope=False, info=None):
     if is_in_dev() or force_scope:
         scopefunc = scope_func
@@ -140,13 +116,13 @@ def make_session(engines, force_scope=False, info=None):
         scopefunc=scopefunc
     )
     return session
-=======
+
+
 def create_engine(*args, **kwds):
     engine = patch_engine(sqlalchemy_create_engine(*args, **kwds))
     get_sql_logger().register(engine)
     event.listen(engine, 'before_cursor_execute', sql_commenter, retval=True)
     return engine
->>>>>>> master
 
 
 def gen_commit_deco(DBSession, raise_exc, error_code):
@@ -170,27 +146,6 @@ def gen_commit_deco(DBSession, raise_exc, error_code):
     return decorated
 
 
-<<<<<<< HEAD
-=======
-def make_session(engines, force_scope=False, info=None):
-    if is_in_dev() or force_scope:
-        scopefunc = scope_func
-    else:
-        scopefunc = None
-
-    session = scoped_session(
-        sessionmaker(
-            class_=RoutingSession,
-            expire_on_commit=False,
-            engines=engines,
-            info=info or {"name": uuid.uuid4().hex},
-        ),
-        scopefunc=scopefunc
-    )
-    return session
-
-
->>>>>>> master
 def sql_commenter(conn, cursor, statement, params, context, executemany):
     if hasattr(g, 'call_meta_data') and 'request_id' in g.call_meta_data:
         request_id = g.get_call_meta('request_id')
@@ -249,10 +204,7 @@ class DBManager(object):
                              "please check your config".format(name))
         session = self._make_session(name, config)
         self.session_map[name] = session
-<<<<<<< HEAD
         return session
-=======
->>>>>>> master
 
     @classmethod
     def _make_session(cls, db, config):

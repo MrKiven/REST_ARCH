@@ -4,32 +4,17 @@ import logging
 import os
 import time
 import contextlib
-<<<<<<< HEAD
-import time
-import os
 import threading
 
 from sqlalchemy import event
 
 from .consts import PLACE_HOLDER
 from .utils import LIB_DIR_PATH
-=======
-from sqlalchemy import event
-import threading
 
->>>>>>> master
 from .skt.config import load_app_config
 from .skt import env
 from .ctx import g
-<<<<<<< HEAD
-from .skt import env
 from .conf import settings
-=======
-from .consts import PLACE_HOLDER
-from .conf import settings
-
-LIB_DIR_PATH = os.path.dirname(os.path.abspath(__file__))
->>>>>>> master
 
 
 def obj2str(obj):
@@ -283,10 +268,6 @@ class SQLLogger(object):
             else:
                 self.logger.error(content)
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 sql_logger = None
 
 
