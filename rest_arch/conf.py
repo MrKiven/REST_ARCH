@@ -3,7 +3,7 @@
 import logging
 
 from importlib import import_module
-from .utils import EmptyValue, warn_deprecation
+from .utils import EmptyValue
 
 __all__ = ['settings']
 
@@ -197,24 +197,11 @@ class Config(DefaultConfig):
 
     def __init__(self, *args, **kwargs):
         super(Config, self).__init__(*args, **kwargs)
-        self.celeryconfig = None
 
     def _after_update_config(self):
         """if :attr:`ASYNC_ENABLED` is ``True``, will load
         :class:`CeleryConfig`
         """
         super(Config, self)._after_update_config()
-        if self.ASYNC_ENABLED and not self.USE_MEMORY_MQ:
-            from .ves.config import load_app_config
-            self.celeryconfig = CeleryConfig()
-
-            config = load_app_config()
-            celery_settings = config.celery_settings
-            if not celery_settings:
-                warn_deprecation(logger, '`ASYNC_CELERYCONFIG`',
-                                 '`celery_settings` in `app.yaml`',
-                                 pat='%s is deprecating, use %s instead')
-                celery_settings = self.ASYNC_CELERYCONFIG
-            self.celeryconfig.from_object(celery_settings)
 
 settings = Config()

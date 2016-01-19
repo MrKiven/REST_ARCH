@@ -3,6 +3,7 @@
 import logging
 import os
 import sys
+from importlib import import_module
 from .config import load_arch_config, load_app_config
 from .exc import AppConfigLoadFailException, EnvNotReadyYetException
 from .consts import (
@@ -52,6 +53,7 @@ gevent_patched = False
 in_profile = False
 loggers_initialized = False
 initialized = False
+settings_updated = False
 
 
 def set_profile(v):
@@ -79,7 +81,23 @@ def initialize():
         logger.warn("Env is already initialized, skipping")
         return
     patch_gevent()
+    update_settings()
     initialized = True
+
+
+def update_settings():
+    """Update core's settings by user settings, and compact 'old_zeus_app'.
+    """
+    global settings_updated
+    if settings_updated:
+        logger.warn("settings is already updated, skipping")
+        return
+    from ..conf import settings
+    app_config = load_app_config()
+    sys.path.insert(0, '.')
+    mo_settings = import_module(app_config.app_settings_uri)
+    settings.from_object(mo_settings)
+    settings_updated = True
 
 
 def patch_gevent():
