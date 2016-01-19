@@ -15,5 +15,14 @@ class Client(object):
     def get(self, route):
         return requests.get(self.url + route)
 
-    def post(self, route, payload):
-        return requests.post(self.url + route, data=json.dumps(payload))
+    # default content-type: json
+    def post(self, route, payload, json_format=True):
+        if json_format:
+            headers = {'Content-Type': 'application/json'}
+        else:
+            headers = None
+        return requests.post(
+            self.url + route,
+            headers=headers,
+            data=json.dumps(payload)
+        )
