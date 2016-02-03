@@ -26,3 +26,7 @@ class Client(object):
             headers=headers,
             data=json.dumps(payload)
         )
+
+clients = {
+    'skt.test': Client()
+}

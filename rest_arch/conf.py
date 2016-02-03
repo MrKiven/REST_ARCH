@@ -3,7 +3,7 @@
 import logging
 
 from importlib import import_module
-from .utils import EmptyValue
+from .utils import EmptyValue, warn_deprecation
 
 __all__ = ['settings']
 
@@ -175,7 +175,44 @@ class DefaultConfig(BaseConfig):
 
 
 class CeleryConfig(DefaultConfig):
-    pass
+    """Celery config used by the project's async feature"""
+    __DEFAULT_SETTINGS__ = {
+        'BROKER_URL': '',
+        'CELERY_DEFAULT_EXCHANGE': '',
+        'CELERY_RESULT_BACKEND': default_empty(''),
+        'CELERY_QUEUES': default_empty({}),
+        'CELERYBEAT_SCHEDULE': default_empty({}),
+
+        'BROKER_POOL_LIMIT': 50,
+        'CELERY_IMPORTS': ("rest_arch.async"),
+        'CELERY_MESSAGE_COMPRESSION': 'gzip',
+        'CELERY_REDIS_MAX_CONNECTIONS': 200,
+        'CELERY_TASK_RESULT_EXPIRES': 60 * 20,
+        'CELERY_TIMEZONE': 'Asia/Shanghai',
+        'CELERY_ENABLE_UTC': False,
+        'CELERY_ACCEPT_CONTENT': ['pickle', 'msgpack', 'json'],
+        'CELERY_TASK_SERIALIZER': 'pickle',
+        'CELERY_RESULT_SERIALIZER': 'pickle',
+        'CELERYD_MAX_TASKS_PER_CHILD': 5000,
+        'CELERY_DISABLE_RATE_LIMITS': True,
+        'CELERY_SEND_EVENTS': False,
+        'CELERY_SEND_TASK_SENT_EVENT': False,
+        'CELERY_TRACK_STARTED': True,
+        'CELERY_ACKS_LATE': True,
+        'CELERYD_PREFETCH_MULTIPLIER': 1,
+        'CELERY_CHORD_PROPAGATES': True,
+        'CELERYD_TASK_SOFT_TIME_LIMIT': 10,
+        'CELERYD_TASK_TIME_LIMIT': 20,
+        'CELERY_TASK_PUBLISH_RETRY': True,
+        'CELERY_TASK_PUBLISH_RETRY_POLICY': {
+            "max_retries": 10,
+            "interval_start": 0,
+            "interval_step": 0.2,
+            "interval_max": 1,
+        },
+        'CELERY_DEFAULT_EXCHANGE_TYPE': 'direct',
+        'CELERY_ROUTES': ('rest_arch.async.AsyncRouter', ),
+    }
 
 
 class Config(DefaultConfig):
@@ -203,5 +240,17 @@ class Config(DefaultConfig):
         :class:`CeleryConfig`
         """
         super(Config, self)._after_update_config()
+        if self.ASYNC_ENABLED and not self.USE_MEMORY_MQ:
+            from .ves.config import load_app_config
+            self.celeryconfig = CeleryConfig()
+
+            config = load_app_config()
+            celery_settings = config.celery_settings
+            if not celery_settings:
+                warn_deprecation(logger, '`ASYNC_CELERYCONFIG`',
+                                 '`celery_settings` in `app.yaml`',
+                                 pat='%s is deprecating, use %s instead')
+                celery_settings = self.ASYNC_CELERYCONFIG
+            self.celeryconfig.from_object(celery_settings)
 
 settings = Config()

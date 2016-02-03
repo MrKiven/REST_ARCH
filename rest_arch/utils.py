@@ -202,6 +202,7 @@ class EmptyValue(object):
         """
         return val not in (False, 0) and not val
 
+
 def warn_deprecation(logger_or_name, old, new, lvl=logging.WARNING,
                      pat=DEPRECATION_PATTERN):
     if isinstance(logger_or_name, logging.Logger):
