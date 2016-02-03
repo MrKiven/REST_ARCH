@@ -86,7 +86,7 @@ def initialize():
 
 
 def update_settings():
-    """Update core's settings by user settings, and compact 'old_zeus_app'.
+    """Update core's settings by user settings.
     """
     global settings_updated
     if settings_updated:
