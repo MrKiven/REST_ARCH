@@ -1,6 +1,10 @@
 RESTful Arch Changelog
 =====================
 
+0.1.3
+-----
+* support celery task
+
 0.1.2
 -----
 * first alpha version
