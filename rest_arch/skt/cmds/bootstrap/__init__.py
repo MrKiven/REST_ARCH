@@ -119,6 +119,8 @@ def bootstrap(app_id, service_name):
                         folder=package_name)
         render_template('settings.py.jinja', mapping=mapping,
                         folder=package_name)
+        render_template('celeryconfig.py.jinja', mapping=mapping,
+                        folder=package_name)
         render_template('requirements.txt.jinja', mapping=mapping)
         render_template('app.yaml.jinja', mapping=mapping)
         render_template('__init__.py.jinja', mapping=mapping,

@@ -224,6 +224,17 @@ class Config(DefaultConfig):
         # logging
         'SQLLOGGER_SWITCH': lambda: False,
 
+        # async
+        'ASYNC_ENABLED': True,
+        'ASYNC_CELERYCONFIG': '',
+        'USE_MEMORY_MQ': False,
+        'TASK_THRIFT_ERROR_RETRY_WAIT': 5,
+        'TASK_MAX_RETRY_COUNT': 12 * 60 * 60 / 5,
+        'TASK_UNKOWN_ERROR_RETRY_WAIT': 15,
+        'TASK_TE_MAX_RETRY_COUNT': 12 * 60 * 60 / 15,
+        'TASK_UE_MAX_RETRY_COUNT': 12 * 60 * 60 / 15,
+
+
         # db
         'DB_POOL_SIZE': 10,
         'DB_MAX_OVERFLOW': 1,
@@ -241,7 +252,7 @@ class Config(DefaultConfig):
         """
         super(Config, self)._after_update_config()
         if self.ASYNC_ENABLED and not self.USE_MEMORY_MQ:
-            from .ves.config import load_app_config
+            from .skt.config import load_app_config
             self.celeryconfig = CeleryConfig()
 
             config = load_app_config()

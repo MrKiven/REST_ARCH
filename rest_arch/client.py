@@ -28,5 +28,5 @@ class Client(object):
         )
 
 clients = {
-    'skt.test': Client()
+    'skt.test': Client('localhost', 8010)
 }

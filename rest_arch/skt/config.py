@@ -115,6 +115,10 @@ class BareAppConfig(object):
         return self
 
     @cached_property
+    def celery_settings(self):
+        return self.config.get('celery_settings')
+
+    @cached_property
     def app_name(self):
         return self.config["app_name"]
 
