@@ -13,6 +13,10 @@ bump:
 	@if [ -z "$(ver)" ]; then echo 'usage: make bump ver=VER_NUM'; exit 1; fi
 	@./tools/bump.py $(ver)
 
+tag:
+	@t=`python setup.py  --version`;\
+	echo v$$t; git tag v$$t
+
 doc:
 	make -C docs html
 
