@@ -1,6 +1,11 @@
 RESTful Arch Changelog
 =====================
 
+0.1.4
+-----
+* setup loggers when init
+* upgrade `redis` and `ipython` version
+
 0.1.3
 -----
 * support celery task
