@@ -41,11 +41,11 @@ setup(
     entry_points={"console_scripts": entry_points},
     install_requires=[
         'PyMySQL==0.6.2',
-        'redis==2.10.3',
+        'redis==2.10.5',
         'requests==2.7.0',
         'SQLAlchemy==0.9.3',
         'PyYAML==3.11',
-        'ipython==3.1.0',
+        'ipython==4.1.2',
         'gipc==0.5.0',
         'wheel==0.24.0',
         'click==5.1',
