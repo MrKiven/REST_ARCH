@@ -6,6 +6,7 @@ import sys
 from importlib import import_module
 from .config import load_arch_config, load_app_config
 from .exc import AppConfigLoadFailException, EnvNotReadyYetException
+from .log import setup_loggers
 from .consts import (
     APP_CONFIG_PATH,
     ENV_DEV,
@@ -81,8 +82,18 @@ def initialize():
         logger.warn("Env is already initialized, skipping")
         return
     patch_gevent()
+    init_loggers()
     update_settings()
     initialized = True
+
+
+def init_loggers():
+    global loggers_initialized
+    if loggers_initialized:
+        logger.warn("logging is already initialized, skipping")
+        return
+    setup_loggers(load_app_config().logger_name, env())
+    loggers_initialized = True
 
 
 def update_settings():
