@@ -44,7 +44,7 @@ setup(
         'redis==2.10.5',
         'requests==2.7.0',
         'SQLAlchemy==0.9.3',
-        'PyYAML==3.11',
+        'PyYAML==5.1',
         'ipython==4.1.2',
         'gipc==0.5.0',
         'wheel==0.24.0',
