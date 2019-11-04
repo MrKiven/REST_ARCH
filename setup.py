@@ -42,7 +42,7 @@ setup(
     install_requires=[
         'PyMySQL==0.6.2',
         'redis==2.10.5',
-        'requests==2.7.0',
+        'requests==2.20.0',
         'SQLAlchemy==0.9.3',
         'PyYAML==3.11',
         'ipython==4.1.2',
