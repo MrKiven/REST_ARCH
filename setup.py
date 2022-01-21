@@ -45,7 +45,7 @@ setup(
         'requests==2.7.0',
         'SQLAlchemy==0.9.3',
         'PyYAML==3.11',
-        'ipython==4.1.2',
+        'ipython==7.16.3',
         'gipc==0.5.0',
         'wheel==0.24.0',
         'click==5.1',
