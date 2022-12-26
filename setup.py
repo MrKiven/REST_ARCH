@@ -47,7 +47,7 @@ setup(
         'PyYAML==3.11',
         'ipython==4.1.2',
         'gipc==0.5.0',
-        'wheel==0.24.0',
+        'wheel==0.38.1',
         'click==5.1',
         'Fabric==1.10.2',
         'Jinja2==2.7.3',
